@@ -1,7 +1,7 @@
-      // Initial array of movies
-      var pokeDeck = ["Pikachu", "Bulbasaur", "Charmander", "Snorlax"];
+// Initial array of movies
+var pokeDeck = ["Pikachu", "Bulbasaur", "Charmander", "Snorlax"];
 
-      // displayMovieInfo function re-renders the HTML to display the appropriate content
+// displayMovieInfo function re-renders the HTML to display the appropriate content
 function displayGiphy() {
 
     var pokemon = $(this).attr("data-name");
@@ -10,27 +10,52 @@ function displayGiphy() {
     $.ajax({
         url: queryURL,
         method: "GET"
-    }).then( function(response){
-          // Creating a div to hold the movie
-        var pokeDiv = $("<div class='giphy'>");
+    }).then(function (response) {
+        // Creating a div to hold the movie
+        //var toAdd = document.createDocumentFragment();
+        var pokeDiv = $("<div class='giphy flex-container'>");
+        for (var i = 0; i < 10; i++) {
+            var rating = response.data[i].rating;
+            var imgURL = response.data[i].images.original.url;
+            var imgURLStill = response.data[i].images.original_still.url;
+            var p = $("<p>").text("Rating: " + rating);
+            // Retrieving the URL for the image
+            //to do, get each rating and image to fall next to eachother
+            // Creating an element to hold the image
+            var image = $("<img>");
+            image.attr("src", imgURLStill);
 
-        // Retrieving the URL for the image
-        var imgURL = response.data[0].images.original.url;
+            image.attr("data-still", imgURLStill);
 
-        // Creating an element to hold the image
-        var image = $("<img>").attr("src", imgURL);
+            image.attr("data-animate", imgURL);
 
-        // Appending the image
-        pokeDiv.append(image);
-        $("#giphy-view").html(pokeDiv);
+            image.attr("data-state", "still");
+
+            image.attr("class", "gif");
+
+            $("#giphy-view").html(pokeDiv);
+            pokeDiv.append(p);
+            pokeDiv.append(image);
+
+            $(".gif").on("click", function () {
+                // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
+                var state = $(this).attr("data-state");
+                // If the clicked image's state is still, update its src attribute to what its data-animate value is.
+                // Then, set the image's data-state to animate
+                // Else set src to the data-still value
+                if (state === "still") {
+                    $(this).attr("src", $(this).attr("data-animate"));
+                    $(this).attr("data-state", "animate");
+                } else {
+                    $(this).attr("src", $(this).attr("data-still"));
+                    $(this).attr("data-state", "still");
+                }
+            });
+        }
     });
-    
-}
-// Function for displaying movie data
-function renderButtons() {
 
-    // Deleting the movies prior to adding new movies
-    // (this is necessary otherwise you will have repeat buttons)
+}
+function renderButtons() {
     $("#buttons-view").empty();
 
     // Looping through the array of movies
@@ -58,13 +83,12 @@ $("#add-giphy").on("click", function (event) {
     // Adding movie from the textbox to our array
     pokeDeck.push(pokemon);
 
+
     // Calling renderButtons which handles the processing of our movie array
     renderButtons();
     $("#giphy-input").val("");
 });
-
 // Adding a click event listener to all elements with a class of "movie-btn"
 $(document).on("click", ".giphy-btn", displayGiphy);
-
 // Calling the renderButtons function to display the intial buttons
 renderButtons();
