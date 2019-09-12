@@ -5,7 +5,7 @@ body{
     background-attachment: fixed;
     background-size: 100%;
     margin-top: 50px;
-    text-align: center;
+    align-content: center;
 }
 img{
     width: 200px;
@@ -55,7 +55,10 @@ div {
     box-shadow: 5px 5px 5px grey;
     display: block;
 }
-
+#buttons-view{
+    display: block;
+    
+}
 #title{
     width: 70%;
     margin-left: auto;
