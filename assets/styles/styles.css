@@ -10,9 +10,10 @@ body{
 img{
     width: 200px;
     height: auto;
-    margin: 5px;
     border: solid;
     border-radius: 10px;
+
+
 }
 p{
     width: 200px;
@@ -44,6 +45,8 @@ div {
 .positioning{
     width: 200px;
     position: relative;
+    margin: 5px;
+
     
 }
 .container{
@@ -57,7 +60,7 @@ div {
 }
 #buttons-view{
     display: block;
-    
+
 }
 #title{
     width: 70%;
