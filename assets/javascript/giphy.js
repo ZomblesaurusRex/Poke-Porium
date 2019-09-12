@@ -15,10 +15,12 @@ function displayGiphy() {
         //var toAdd = document.createDocumentFragment();
         var pokeDiv = $("<div class='giphy flex-container'>");
         for (var i = 0; i < 10; i++) {
+            var newDiv = $("<div class='positioning'>");
+      
             var rating = response.data[i].rating;
             var imgURL = response.data[i].images.original.url;
             var imgURLStill = response.data[i].images.original_still.url;
-            var p = $("<p>").text("Rating: " + rating);
+            var p = $("<p>").html("Rating: " + rating);
             // Retrieving the URL for the image
             //to do, get each rating and image to fall next to eachother
             // Creating an element to hold the image
@@ -34,8 +36,10 @@ function displayGiphy() {
             image.attr("class", "gif");
 
             $("#giphy-view").html(pokeDiv);
-            pokeDiv.append(p);
-            pokeDiv.append(image);
+            pokeDiv.append(newDiv);
+            newDiv.append(image);
+            newDiv.prepend(p);
+
 
             $(".gif").on("click", function () {
                 // The attr jQuery method allows us to get or set the value of any attribute on our HTML element

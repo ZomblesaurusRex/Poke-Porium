@@ -5,6 +5,7 @@ body{
     background-attachment: fixed;
     background-size: 100%;
     margin-top: 50px;
+    text-align: center;
 }
 img{
     width: 200px;
@@ -12,6 +13,10 @@ img{
     margin: 5px;
     border: solid;
     border-radius: 10px;
+}
+p{
+    width: 200px;
+    
 }
 button{
     margin-left: 10px;
@@ -21,16 +26,25 @@ button{
     border: none;
     background-color: #df0303;
     color: #ffffff;
-font-family: 'VT323', monospace;
-font-size: 15px;
-border-radius: 5px;
-box-shadow: 10px 10px 5px grey;
+    font-family: 'VT323', monospace;
+    font-size: 15px;
+    border-radius: 5px;
+    box-shadow: 10px 10px 5px grey;
 }
 form{
     margin-top: 20px;
 }
 #giphy-view{
     padding: 0;
+}
+div {
+  display: flex;  
+  flex-wrap: wrap;
+}
+.positioning{
+    width: 200px;
+    position: relative;
+    
 }
 .container{
     margin:auto;
@@ -58,8 +72,8 @@ form{
 
 }
 #catch{
-font-family: 'VT323', monospace;
-font-size: 35px;
+    font-family: 'VT323', monospace;
+    font-size: 35px;
 }
 
 #add-giphy{
